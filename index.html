@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Woxxy –  A Student</title>
+  <title>Woxxy – A Student</title>
   <style>
     /* =============================================
        Reset + Base
@@ -76,6 +76,42 @@
       --bg-medium: #202020;
       --text-light: #ccc;
       --link-glow: #00bfff;
+      --nav-bg: #181818;
+      --nav-link: #ccc;
+      --nav-hover: #00bfff;
+    }
+
+    /* =============================================
+       Header & Navigation
+       ============================================= */
+    header {
+      position: fixed;
+      top: 0; left: 0; width: 100%;
+      background: var(--nav-bg);
+      border-bottom: 1px solid #333;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+    }
+    header h2 {
+      color: var(--primary);
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    nav ul {
+      display: flex;
+      gap: 20px;
+    }
+    nav a {
+      color: var(--nav-link);
+      font-weight: 500;
+      transition: color 0.3s, text-shadow 0.3s;
+    }
+    nav a:hover {
+      color: var(--nav-hover);
+      text-shadow: 0 0 5px var(--nav-hover);
     }
 
     /* =============================================
@@ -85,7 +121,7 @@
       width: 100%;
       max-width: 900px;
       margin: 0 auto;
-      padding: 80px 20px 40px;
+      padding: 140px 20px 40px; /* extra top padding for fixed header */
       display: flex;
       flex-direction: column;
       gap: 60px;
@@ -100,7 +136,7 @@
     }
 
     /* =============================================
-       Animations (Section Fade ‐ In)
+       Animations (Section Fade-In)
        ============================================= */
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(40px); }
@@ -149,6 +185,7 @@
       text-align: center;
       padding: 60px 20px;
       overflow: hidden;
+      border-radius: 8px;
     }
     #hero h1 {
       font-size: 3rem;
@@ -213,6 +250,36 @@
     #about .highlight {
       color: var(--primary);
       font-weight: bold;
+    }
+
+    /* =============================================
+       What I Do Section
+       ============================================= */
+    #do p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--text-light);
+      margin-bottom: 20px;
+    }
+
+    /* =============================================
+       Learning Section
+       ============================================= */
+    #learning p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--text-light);
+      margin-bottom: 20px;
+    }
+
+    /* =============================================
+       Goals Section
+       ============================================= */
+    #goals p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--text-light);
+      margin-bottom: 20px;
     }
 
     /* =============================================
@@ -296,6 +363,65 @@
     }
 
     /* =============================================
+       Blog Feed Section (Single Post)
+       ============================================= */
+    #blog {
+      padding: 40px 20px;
+      background: var(--bg-dark);
+      border-radius: 12px;
+      position: relative;
+    }
+    .blog-title {
+      font-size: 2rem;
+      color: var(--secondary);
+      margin-bottom: 20px;
+      text-align: center;
+      animation: fadeInUp 1s ease forwards;
+    }
+    .post-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .post-item {
+      background: #2a2a2a;
+      padding: 20px;
+      border-radius: 10px;
+      transition: background 0.3s, box-shadow 0.3s, transform 0.3s;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeInUp 0.8s ease forwards;
+    }
+    .post-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .post-item h3 {
+      color: var(--primary);
+      margin-bottom: 8px;
+      font-size: 1.3rem;
+    }
+    .post-item .post-meta {
+      font-size: 0.9rem;
+      color: #888;
+      margin-bottom: 12px;
+    }
+    .post-item p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--text-light);
+      margin-bottom: 10px;
+    }
+    .post-item a.read-more {
+      color: var(--link-glow);
+      font-weight: bold;
+      transition: text-shadow 0.3s;
+    }
+    .post-item a.read-more:hover {
+      text-shadow: 0 0 5px var(--link-glow);
+    }
+
+    /* =============================================
        Contact Section
        ============================================= */
     #contact {
@@ -333,6 +459,9 @@
       color: #666;
       font-size: 0.9rem;
       border-top: 2px solid #333;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeInUp 1s ease 3.6s forwards;
     }
 
     /* =============================================
@@ -355,7 +484,7 @@
        ============================================= */
     @media (max-width: 768px) {
       #container {
-        padding: 60px 15px 30px;
+        padding: 120px 15px 30px;
         gap: 50px;
       }
       #hero h1 {
@@ -364,7 +493,7 @@
       #hero p {
         font-size: 1rem;
       }
-      .section-title {
+      .section-title, .blog-title {
         font-size: 1.8rem;
       }
       #skills ul li, .cert-item {
@@ -379,25 +508,40 @@
       #hero h1 {
         font-size: 2.2rem;
       }
-      .section-title {
+      .section-title, .blog-title {
         font-size: 1.6rem;
       }
       #hero p {
         font-size: 0.9rem;
       }
       #container {
-        padding: 50px 10px 20px;
+        padding: 100px 10px 20px;
       }
       .discord-icon {
         width: 20px;
         height: 20px;
       }
     }
-
   </style>
 </head>
 <body>
+
+  <!-- Header / Navigation -->
+  <header>
+    <h2>woxxy</h2>
+    <nav>
+      <ul>
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#blog">Blog</a></li>
+        <li><a href="#goals">Goal</a></li>
+        <li><a href="#about">About Me</a></li>
+        <li><a href="https://github.com/woxxy84" target="_blank">GitHub</a></li>
+      </ul>
+    </nav>
+  </header>
+
   <div id="container">
+    <!-- Hero Section -->
     <section id="hero" class="animate" style="animation-delay:0.2s;">
       <h1>I’m woxxy</h1>
       <p>
@@ -408,12 +552,13 @@
       <a href="#about" class="scroll-link">Learn More</a>
     </section>
 
+    <!-- About Section -->
     <section id="about" class="animate delay-1">
       <div class="section-title">Who I Am</div>
       <p>
-        I'm a student in Cloud Security Engineering. I'm learning how to configure Linux servers, write basic automation scripts, 
-        and secure cloud platforms like AWS and GCP. I've worked on setting up firewall rules, 
-        creating IAM policies, and trying out beginner-level penetration testing to check security setups..
+        I'm a student in Cloud Security Engineering. I'm learning how to configure Linux servers, write basic automation scripts,
+        and secure cloud platforms like AWS and GCP. I've worked on setting up firewall rules,
+        creating IAM policies, and trying out beginner-level penetration testing to check security setups.
       </p>
       <p class="mt-20">
         My goal is to excel in cloud security best practices, contribute to open-source security tools,
@@ -421,18 +566,19 @@
       </p>
     </section>
 
+    <!-- What I Do Section -->
     <section id="do" class="animate delay-2">
       <div class="section-title">What I Do</div>
       <p>
         • Learning to configure and secure Linux servers using tools like UFW, SSH keys, and Fail2Ban.<br>
-• Practicing automation of basic security tasks using Python and shell scripting.<br>
-• Exploring infrastructure-as-code by building simple AWS/GCP setups like VPCs, subnets, and IAM roles.<br>
-• Writing basic documentation and setup guides for secure deployments.<br>
-• Working with mentors or online communities to spot vulnerabilities and learn how to fix them.<br>
-
+        • Practicing automation of basic security tasks using Python and shell scripting.<br>
+        • Exploring infrastructure-as-code by building simple AWS/GCP setups like VPCs, subnets, and IAM roles.<br>
+        • Writing basic documentation and setup guides for secure deployments.<br>
+        • Working with mentors or online communities to spot vulnerabilities and learn how to fix them.<br>
       </p>
     </section>
 
+    <!-- Learning Section -->
     <section id="learning" class="animate delay-3">
       <div class="section-title">What I’m Learning</div>
       <p>
@@ -445,6 +591,7 @@
       </p>
     </section>
 
+    <!-- Goals Section -->
     <section id="goals" class="animate delay-4">
       <div class="section-title">What I Want to Be</div>
       <p>
@@ -455,6 +602,7 @@
       </p>
     </section>
 
+    <!-- Skills Section -->
     <section id="skills" class="animate delay-5">
       <div class="section-title">Skills</div>
       <ul>
@@ -466,6 +614,7 @@
       </ul>
     </section>
 
+    <!-- Certificates Section -->
     <section id="certificates" class="animate" style="animation-delay:2.6s;">
       <div class="section-title">Certificates</div>
       <div class="cert-item">
@@ -482,12 +631,32 @@
       </div>
     </section>
 
+    <!-- Actions Section -->
     <section id="actions" class="animate" style="animation-delay:2.8s;">
       <button onclick="window.location.href='#contact'">Contact Me</button>
       <button onclick="window.open('https://github.com/woxxy84','_blank')">GitHub</button>
       <button onclick="window.open('https://linkedin.com/','_blank')">LinkedIn</button>
     </section>
 
+    <!-- Blog Feed Section (Single Post) -->
+    <section id="blog" class="animate" style="animation-delay:3.0s;">
+      <div class="blog-title">Blog</div>
+      <div class="post-list">
+        <!-- Only one post for now -->
+        <div class="post-item" style="animation-delay: 0.2s;">
+          <h3>Welcome to Woxxy’s Cyber Chronicle</h3>
+          <div class="post-meta">Posted on Dec 27, 2024</div>
+          <p>
+            Woxxy’s Cyber Chronicle is my raw log — balancing underground hacking with cloud security grind. Expect real setups, scars, and skills, not sugarcoated stories. I'm learning fast, building harder. Stay tuned.  
+          </p>
+          <a href="post1.html" class="read-more">Continue reading →</a> <br>
+          --------------------------------------------------------------------------
+        </div>
+      </div>
+    </section>
+    
+
+    <!-- Contact Section -->
     <section id="contact" class="animate" style="animation-delay:3.2s;">
       <div class="section-title">Get in Touch</div>
       <p>If you want to collaborate, learn, or discuss cloud security projects, find me on Discord:</p>
@@ -499,6 +668,7 @@
       </a>
     </section>
 
+    <!-- Footer -->
     <footer class="animate" style="animation-delay:3.4s;">
       <p>© 2025 woxxy — Building Security, One Layer at a Time.</p>
       <p>Designed &amp; Developed by <span style="color: var(--primary);">woxxy</span></p>
